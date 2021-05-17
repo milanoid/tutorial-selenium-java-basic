@@ -10,15 +10,17 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class BasicDemo {
 
 	@Test
         public void test() {
 
-		// Use Chrome browser
-		WebDriver driver = new ChromeDriver();
 
+		// Use Chrome browser
+		boolean CI_TEST = Boolean.getBoolean("ci_test");
+		WebDriver driver = new ChromeDriver(new ChromeOptions().setHeadless(CI_TEST));
 		// Initialize the Runner for your test.
 		EyesRunner runner = new ClassicRunner();
 
@@ -50,7 +52,7 @@ public class BasicDemo {
 
 	
 		// You can get your api key from the Applitools dashboard
-		config.setApiKey("APPLITOOLS_API_KEY");
+		config.setApiKey(System.getenv("APPLITOOLS_API_KEY"));
 
 		// set new batch
 		config.setBatch(new BatchInfo("Demo batch"));
