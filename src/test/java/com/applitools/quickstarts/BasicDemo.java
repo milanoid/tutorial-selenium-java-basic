@@ -91,12 +91,7 @@ public class BasicDemo {
 	private static void tearDown(WebDriver driver, EyesRunner runner) {
 		driver.quit();
 
-		// Wait and collect all test results
-		// we pass false to this method to suppress the exception that is thrown if we
-		// find visual differences
-		TestResultsSummary allTestResults = runner.getAllTestResults(false);
-
-		// Print results
+		TestResultsSummary allTestResults = runner.getAllTestResults();
 		System.out.println(allTestResults);
 	}
 
