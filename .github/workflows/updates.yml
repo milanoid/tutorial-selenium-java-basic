@@ -18,7 +18,11 @@ jobs:
           java-version: 11
           distribution: 'adopt'
 
-      - run: mvn versions:use-latest-releases -Dtest=BasicDemo -Dci_test=true test
+      - name: Update dependencies
+        run: mvn versions:use-latest-releases
+
+
+      - run: mvn clean -Dtest=BasicDemo test
         env:
           APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
 

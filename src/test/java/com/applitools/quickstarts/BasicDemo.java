@@ -14,13 +14,17 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 public class BasicDemo {
 
+	public static boolean getCI() {
+		String env = System.getenv("CI");
+		return Boolean.parseBoolean(env);
+	}
+
 	@Test
         public void test() {
 
 
 		// Use Chrome browser
-		boolean CI_TEST = Boolean.getBoolean("ci_test");
-		WebDriver driver = new ChromeDriver(new ChromeOptions().setHeadless(CI_TEST));
+		WebDriver driver = new ChromeDriver(new ChromeOptions().setHeadless(getCI()));
 		// Initialize the Runner for your test.
 		EyesRunner runner = new ClassicRunner();
 
