@@ -10,15 +10,21 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class BasicDemo {
+
+	public static boolean getCI() {
+		String env = System.getenv("CI");
+		return Boolean.parseBoolean(env);
+	}
 
 	@Test
         public void test() {
 
-		// Use Chrome browser
-		WebDriver driver = new ChromeDriver();
 
+		// Use Chrome browser
+		WebDriver driver = new ChromeDriver(new ChromeOptions().setHeadless(getCI()));
 		// Initialize the Runner for your test.
 		EyesRunner runner = new ClassicRunner();
 
@@ -50,7 +56,7 @@ public class BasicDemo {
 
 	
 		// You can get your api key from the Applitools dashboard
-		config.setApiKey("APPLITOOLS_API_KEY");
+		config.setApiKey(System.getenv("APPLITOOLS_API_KEY"));
 
 		// set new batch
 		config.setBatch(new BatchInfo("Demo batch"));
@@ -89,12 +95,7 @@ public class BasicDemo {
 	private static void tearDown(WebDriver driver, EyesRunner runner) {
 		driver.quit();
 
-		// Wait and collect all test results
-		// we pass false to this method to suppress the exception that is thrown if we
-		// find visual differences
-		TestResultsSummary allTestResults = runner.getAllTestResults(false);
-
-		// Print results
+		TestResultsSummary allTestResults = runner.getAllTestResults();
 		System.out.println(allTestResults);
 	}
 
