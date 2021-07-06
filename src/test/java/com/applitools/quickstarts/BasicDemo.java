@@ -59,7 +59,7 @@ public class BasicDemo {
 		config.setApiKey(System.getenv("APPLITOOLS_API_KEY"));
 
 		// set new batch
-		config.setBatch(new BatchInfo("Demo batch"));
+		config.setBatch(new BatchInfo("Demo Batch - Selenium for Java - Ultrafast"));
 
 		// set the configuration to eyes
 		eyes.setConfiguration(config);
@@ -69,7 +69,7 @@ public class BasicDemo {
 		// Set AUT's name, test name and viewport size (width X height)
 		// We have set it to 800 x 600 to accommodate various screens. Feel free to
 		// change it.
-		eyes.open(driver, "Demo App - java", "Smoke Test", new RectangleSize(800, 600));
+		eyes.open(driver, "Demo App - Selenium for Java - Ultrafast", "Smoke Test - Selenium for Java - Ultrafast", new RectangleSize(800, 600));
 
 		// Navigate the browser to the "ACME" demo app.
 		driver.get("https://demo.applitools.com");
