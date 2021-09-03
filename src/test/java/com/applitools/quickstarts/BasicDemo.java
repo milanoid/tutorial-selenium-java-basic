@@ -10,15 +10,21 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class BasicDemo {
+
+	public static boolean getCI() {
+		String env = System.getenv("CI");
+		return Boolean.parseBoolean(env);
+	}
 
 	@Test
         public void test() {
 
-		// Use Chrome browser
-		WebDriver driver = new ChromeDriver();
 
+		// Use Chrome browser
+		WebDriver driver = new ChromeDriver(new ChromeOptions().setHeadless(getCI()));
 		// Initialize the Runner for your test.
 		EyesRunner runner = new ClassicRunner();
 
@@ -48,10 +54,10 @@ public class BasicDemo {
 		//config.setStitchMode(StitchMode.CSS);
 
 		// You can get your api key from the Applitools dashboard
-		config.setApiKey("APPLITOOLS_API_KEY");
+		config.setApiKey(System.getenv("APPLITOOLS_API_KEY"));
 
 		// set new batch
-		config.setBatch(new BatchInfo("Demo batch"));
+		config.setBatch(new BatchInfo("Demo Batch - Selenium for Java - Classic"));
 
 		// set the configuration to eyes
 		eyes.setConfiguration(config);
@@ -61,7 +67,7 @@ public class BasicDemo {
 		// Set AUT's name, test name and viewport size (width X height)
 		// We have set it to 800 x 600 to accommodate various screens. Feel free to
 		// change it.
-		eyes.open(driver, "Demo App - java", "Smoke Test", new RectangleSize(800, 600));
+		eyes.open(driver, "Demo App - Selenium for Java - Classic", "Smoke Test - Selenium for Java - Classic", new RectangleSize(800, 600));
 
 		// Navigate the browser to the "ACME" demo app.
 		driver.get("https://demo.applitools.com");
@@ -87,12 +93,7 @@ public class BasicDemo {
 	private static void tearDown(WebDriver driver, EyesRunner runner) {
 		driver.quit();
 
-		// Wait and collect all test results
-		// we pass false to this method to suppress the exception that is thrown if we
-		// find visual differences
-		TestResultsSummary allTestResults = runner.getAllTestResults(false);
-
-		// Print results
+		TestResultsSummary allTestResults = runner.getAllTestResults();
 		System.out.println(allTestResults);
 	}
 
