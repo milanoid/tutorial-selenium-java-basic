@@ -41,14 +41,12 @@ public class BasicDemo {
 
 
 	private static void setUp(Eyes eyes) {
-
 		// Initialize the eyes configuration.
-		Configuration config = new Configuration();
+		Configuration config = eyes.getConfiguration();
 		
 		// Add this configuration if your tested page includes fixed elements.
 		//config.setStitchMode(StitchMode.CSS);
 
-	
 		// You can get your api key from the Applitools dashboard
 		config.setApiKey("APPLITOOLS_API_KEY");
 
