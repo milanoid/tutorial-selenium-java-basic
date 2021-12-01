@@ -70,7 +70,7 @@ public class BasicDemo {
 		eyes.open(driver, "Demo App - Selenium for Java - Classic", "Smoke Test - Selenium for Java - Classic", new RectangleSize(800, 600));
 
 		// Navigate the browser to the "ACME" demo app.
-		driver.get("https://demo.applitools.com");
+		driver.get("https://demo.applitools.com/index_v2.html");
 
 		// To see visual bugs after the first run, use the commented line below instead.
 		// driver.get("https://demo.applitools.com/index_v2.html");
